@@ -22,8 +22,8 @@
 
 <body>
     <div class="container">
-        <h1> Create Profile</h1>
-        <form action="{{ route('profile') }}" method="POST" enctype="multipart/form-data">
+        <h1 style="margin-bottom: 50px;"> Create New Profile</h1>
+        <form action="{{ config('app.url')}}/profile" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
 
             <div class="form-group">
@@ -46,9 +46,13 @@
                 <label for="foto">Foto Terkini</label>
                 <input type="file" name="foto" id="foto">
             </div>
+            <div class="col-md-12 mb-2">
+                  <img id="preview-image-before-upload" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
+                      alt="preview image" style="max-height: 250px;">
+              </div>
             <div class="form-group">
                 <label for="cerita">Cerita Tentang Diri</label><br>
-                <textarea name="cerita" id="cerita" rows="5" cols="80"></textarea>
+                <textarea name="cerita" id="cerita" rows="5" cols="148"></textarea>
             </div>
             <div class="form-group">
                 <label for="jenis_kelamin">Jenis Kelamin</label><br>
@@ -76,5 +80,28 @@
         </form>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
+<script type="text/javascript">
+      
+$(document).ready(function (e) {
+ 
+   
+   $('#foto').change(function(){
+            
+    let reader = new FileReader();
+ 
+    reader.onload = (e) => { 
+ 
+      $('#preview-image-before-upload').attr('src', e.target.result); 
+    }
+ 
+    reader.readAsDataURL(this.files[0]); 
+   
+   });
+   
+});
+ 
+</script>
 
 </html>

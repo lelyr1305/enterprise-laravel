@@ -20,6 +20,7 @@ class CreateProfilesTable extends Migration
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->text('foto');
+            $table->text('path_file');
             $table->text('cerita');
             $table->string('jenis_kelamin');
             $table->string('fakultas');

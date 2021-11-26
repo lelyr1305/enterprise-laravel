@@ -69,12 +69,13 @@
             position: relative;
             padding: .75rem 1.25rem;
             border: 1px solid transparent;
-            border-radius: .25rem
+            border-radius: .25rem;
+            margin: 0 auto;
         }
 
         .alert-success {
-            color: darkblue;
-            background-color: #d4edda;
+            color: white;
+            background-color: green;
             border-color: #c3e6cb
         }
 
@@ -111,7 +112,7 @@
 
             <div class="flex-center position-ref full-height">
                 <div class="content">
-                    <div class="title m-b-md">Profile</div>
+                    <div class="title m-b-md" style="margin-top: 250px;">Profile</div>
                     <div class="links">
                         <a href="{{ config('app.url')}}/profile/create">Create New Profile</a>
                     </div>

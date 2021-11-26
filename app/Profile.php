@@ -12,6 +12,7 @@ class Profile extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'foto',
+        'path_file',
         'cerita',
         'jenis_kelamin',
         'fakultas'

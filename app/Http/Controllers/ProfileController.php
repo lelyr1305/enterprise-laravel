@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -36,20 +37,30 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = $request->validate([
+            'foto' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
 
-        // \App\Profile::create([
-        //     'nama' => $request->get('nama'),
-        //     'alamat' => $request->get('alamat'),
-        //     'tempat_lahir' => $request->get('tempat_lahir'),
-        //     'tanggal_lahir' => $request->get('tanggal_lahir'),
-        //     'foto' => $request->get('foto'),
-        //     'cerita' => $request->get('cerita'),
-        //     'jenis_kelamin' => $request->get('jenis_kelamin'),
-        //     'fakultas' => $request->get('fakultas'),
-        //   ]);
+        $fileName = $request->nama . '.'. $request->file('foto')->getClientOriginalExtension();
+        $path_file = $request->file('foto')->storeAs('public/images',$fileName);
 
-        dd($request->get('nama'), $request->hasFile('foto'));
+        $saveData = new Profile();
+        $saveData->foto = $fileName;
+        $saveData->path_file = $path_file;
 
+        \App\Profile::create([
+            'nama' => $request->get('nama'),
+            'alamat' => $request->get('alamat'),
+            'tempat_lahir' => $request->get('tempat_lahir'),
+            'tanggal_lahir' => $request->get('tanggal_lahir'),
+            'foto' => $fileName,
+            'path_file' => $path_file,
+            'cerita' => $request->get('cerita'),
+            'jenis_kelamin' => $request->get('jenis_kelamin'),
+            'fakultas' => $request->get('fakultas'),
+          ]);
+
+        // dd($validate, $request->file('foto'));
 
         return redirect('/')->with('status', 'New Profile Has been uploaded successfully');
     }
